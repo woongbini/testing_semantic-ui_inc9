@@ -72,4 +72,11 @@ class FoodsController < ApplicationController
 		flash[:alert] = "댓글 ㄳ"
 		redirect_to "/foods/show/#{comment.post_id}"
 	end
+
+	def delete_comment_complete
+		comment = Comment.find(params[:id])
+		comment.destroy
+		flash[:alert] = "댓글삭제욤ㅠㅠ"
+		redirect_to "/foods/show/#{comment.post_id}"
+	end
 end
