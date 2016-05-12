@@ -45,6 +45,10 @@ class FoodsController < ApplicationController
 
   def edit
 		@post = Post.find(params[:id])
+		if @post.user_id != session[:user_id]
+			flash[:alert] = "수정권한 x"
+			redirect_to :back
+		end
   end
 
   def edit_complete
@@ -63,9 +67,14 @@ class FoodsController < ApplicationController
 
   def delete_complete
 		post = Post.find(params[:id])
-		post.destroy
-		flash[:alert] = "삭제됨ㅎ"
-		redirect_to "/"
+		if post.user.id == session[:user_id]
+			post.destroy
+			flash[:alert] = "삭제됨ㅎ"
+			redirect_to "/"
+		else
+			flash[:alert] = "삭제권한 x"
+			redirect_to :back
+		end
   end
 
 	def write_comment_complete
@@ -81,8 +90,13 @@ class FoodsController < ApplicationController
 
 	def delete_comment_complete
 		comment = Comment.find(params[:id])
-		comment.destroy
-		flash[:alert] = "댓글삭제욤ㅠㅠ"
-		redirect_to "/foods/show/#{comment.post_id}"
+		if comment.user_id == session[:user_id]
+			comment.destroy
+			flash[:alert] = "댓글삭제욤ㅠㅠ"
+			redirect_to "/foods/show/#{comment.post_id}"
+		else
+			flash[:alert] = "댓글의 삭제권한 x"
+			redirect_to :back
+		end
 	end
 end
