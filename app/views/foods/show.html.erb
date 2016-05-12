@@ -2,11 +2,12 @@
 <h2>맛집 정보 보기</h2>
 
 <div style="border:1px solid #ffffff">
+	<p><img src="<%= @post.image_url(:medium) %>"></p>
 	<h4>제목 : <%= @post.title %> </h4>
 	<p style="color: #ff0000">분류 : <%= @post.category %> </p>
 	<p>내용 : <%= @post.content %> </p>
 
-	<p><a href="/foods/edit/<%= @post.id %>">수정</a> | <a href="/foods/delete_complete/<%=@post.id %>">삭제</a></p>
+	<p><a href="/foods/edit/<%= @post.id %>">수정</a> | <a href="/foods/delete_complete/<%= @post.id %>">삭제</a></p>
 	<hr>
 	<% @post.comment.each do |comment| %>
 	<p><strong><%= comment.user.username %></strong> <%= comment.content %> | <a href="/foods/delete_comment_complete/<%= comment.id %>">삭제</a>  <p>
