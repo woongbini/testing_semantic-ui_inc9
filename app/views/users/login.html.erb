@@ -1,9 +1,23 @@
-<p><%= flash[:alert] %></p>
-<h2>로그인하기</h2>
+<div class="container">
+  <% if !flash[:alert].nil? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+  <% end %>
 
-<form action="/users/login_complete" method="post">
-	<p>ID : <input type="text" name="username"></p>
-	<p>PW : <input type="password" name="password"></p>
-	<input type="submit" value"login">
-</form>
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center">
+      <h3 class="form-heading">로그인하기</h3>
 
+      <form action="/users/login_complete" method="post">
+        <p><input class="form-input" type="text" name="username" placeholder="아이디"></p>
+        <p><input class="form-input" type="password" name="password" placeholder="비밀번호"></p>
+        <input class="btn btn-lg btn-block" type="submit" value="로그인">
+      </form>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>
